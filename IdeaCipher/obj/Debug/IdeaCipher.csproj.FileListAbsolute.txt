@@ -1,0 +1,9 @@
+D:\SpecialWeb\IdeaCipher\IdeaCipher\bin\Debug\IdeaCipher.exe.config
+D:\SpecialWeb\IdeaCipher\IdeaCipher\bin\Debug\IdeaCipher.exe
+D:\SpecialWeb\IdeaCipher\IdeaCipher\bin\Debug\IdeaCipher.pdb
+D:\SpecialWeb\IdeaCipher\IdeaCipher\obj\Debug\IdeaCipher.csprojAssemblyReference.cache
+D:\SpecialWeb\IdeaCipher\IdeaCipher\obj\Debug\IdeaCipher.cipherForm.resources
+D:\SpecialWeb\IdeaCipher\IdeaCipher\obj\Debug\IdeaCipher.Properties.Resources.resources
+D:\SpecialWeb\IdeaCipher\IdeaCipher\obj\Debug\IdeaCipher.csproj.GenerateResource.cache
+D:\SpecialWeb\IdeaCipher\IdeaCipher\obj\Debug\IdeaCipher.exe
+D:\SpecialWeb\IdeaCipher\IdeaCipher\obj\Debug\IdeaCipher.pdb

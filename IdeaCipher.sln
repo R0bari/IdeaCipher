@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdeaCipher", "IdeaCipher\IdeaCipher.csproj", "{BD320818-553C-498F-867A-58394F08A48E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea_Example", "Idea_Example\Idea_Example.csproj", "{7D7B59C3-5DC7-405A-8BEF-B5019B16AFD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdeaUnitTest", "IdeaUnitTest\IdeaUnitTest.csproj", "{39E0B0F3-B9FE-48A8-80B1-F0C0880FF40E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +19,19 @@ Global
 		{BD320818-553C-498F-867A-58394F08A48E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD320818-553C-498F-867A-58394F08A48E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD320818-553C-498F-867A-58394F08A48E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D7B59C3-5DC7-405A-8BEF-B5019B16AFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D7B59C3-5DC7-405A-8BEF-B5019B16AFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D7B59C3-5DC7-405A-8BEF-B5019B16AFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D7B59C3-5DC7-405A-8BEF-B5019B16AFD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39E0B0F3-B9FE-48A8-80B1-F0C0880FF40E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39E0B0F3-B9FE-48A8-80B1-F0C0880FF40E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39E0B0F3-B9FE-48A8-80B1-F0C0880FF40E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39E0B0F3-B9FE-48A8-80B1-F0C0880FF40E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85C1EC94-0F06-41E1-9BD6-B0FE49094C79}
 	EndGlobalSection
 EndGlobal

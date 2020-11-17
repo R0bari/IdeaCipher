@@ -1,0 +1,10 @@
+D:\SpecialWeb\IdeaCipher\Idea_Example\bin\Debug\Idea_Example.exe.config
+D:\SpecialWeb\IdeaCipher\Idea_Example\bin\Debug\Idea_Example.exe
+D:\SpecialWeb\IdeaCipher\Idea_Example\bin\Debug\Idea_Example.pdb
+D:\SpecialWeb\IdeaCipher\Idea_Example\bin\Debug\IdeaCipher.exe
+D:\SpecialWeb\IdeaCipher\Idea_Example\bin\Debug\IdeaCipher.pdb
+D:\SpecialWeb\IdeaCipher\Idea_Example\bin\Debug\IdeaCipher.exe.config
+D:\SpecialWeb\IdeaCipher\Idea_Example\obj\Debug\Idea_Example.csprojAssemblyReference.cache
+D:\SpecialWeb\IdeaCipher\Idea_Example\obj\Debug\Idea_Example.csproj.CopyComplete
+D:\SpecialWeb\IdeaCipher\Idea_Example\obj\Debug\Idea_Example.exe
+D:\SpecialWeb\IdeaCipher\Idea_Example\obj\Debug\Idea_Example.pdb

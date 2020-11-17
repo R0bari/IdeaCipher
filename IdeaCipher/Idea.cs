@@ -13,22 +13,22 @@ namespace IdeaCipher
     public class Idea
     {
         // Number of rounds.
-        internal static int rounds = 8;
+        internal static int Rounds { get; set; } = 1;
         // Internal encryption sub-keys.
-        internal int[] subKey;
+        internal int[] SubKey { get; set; }
 
         public Idea(String charKey, bool encrypt)
         {
             byte[] key = generateUserKeyFromCharKey(charKey);
             // Expands a 16-byte user key to the internal encryption sub-keys.
-            int[] tempSubKey = expandUserKey(key);
+            int[] tempSubKey = ExpandUserKey(key);
             if (encrypt)
             {
-                subKey = tempSubKey;
+                SubKey = tempSubKey;
             }
             else
             {
-                subKey = invertSubKey(tempSubKey);
+                SubKey = InvertSubKey(tempSubKey);
             }
         }
 
@@ -38,9 +38,9 @@ namespace IdeaCipher
          * @param data
          *    Buffer containing the 8 data bytes to be encrypted/decrypted.
          */
-        public void crypt(byte[] data)
+        public void Сrypt(byte[] data)
         {
-            crypt(data, 0);
+            Сrypt(data, 0);
         }
 
         /**
@@ -51,7 +51,7 @@ namespace IdeaCipher
          * @param dataPos
          *    Start position of the 8 bytes within the buffer.
          */
-        public void crypt(byte[] data, int dataPos)
+        public void Сrypt(byte[] data, int dataPos)
         {
             int x0 = ((data[dataPos + 0] & 0xFF) << 8) | (data[dataPos + 1] & 0xFF);
             int x1 = ((data[dataPos + 2] & 0xFF) << 8) | (data[dataPos + 3] & 0xFF);
@@ -59,16 +59,16 @@ namespace IdeaCipher
             int x3 = ((data[dataPos + 6] & 0xFF) << 8) | (data[dataPos + 7] & 0xFF);
             //
             int p = 0;
-            for (int round = 0; round < rounds; round++)
+            for (int round = 0; round < Rounds; round++)
             {
-                int y0 = mul(x0, subKey[p++]);
-                int y1 = add(x1, subKey[p++]);
-                int y2 = add(x2, subKey[p++]);
-                int y3 = mul(x3, subKey[p++]);
+                int y0 = mul(x0, SubKey[p++]);
+                int y1 = add(x1, SubKey[p++]);
+                int y2 = add(x2, SubKey[p++]);
+                int y3 = mul(x3, SubKey[p++]);
                 //
-                int t0 = mul(y0 ^ y2, subKey[p++]);
+                int t0 = mul(y0 ^ y2, SubKey[p++]);
                 int t1 = add(y1 ^ y3, t0);
-                int t2 = mul(t1, subKey[p++]);
+                int t2 = mul(t1, SubKey[p++]);
                 int t3 = add(t0, t2);
                 //
                 x0 = y0 ^ t2;
@@ -77,10 +77,10 @@ namespace IdeaCipher
                 x3 = y3 ^ t3;
             }
             //
-            int r0 = mul(x0, subKey[p++]);
-            int r1 = add(x2, subKey[p++]);
-            int r2 = add(x1, subKey[p++]);
-            int r3 = mul(x3, subKey[p++]);
+            int r0 = mul(x0, SubKey[p++]);
+            int r1 = add(x2, SubKey[p++]);
+            int r2 = add(x1, SubKey[p++]);
+            int r3 = mul(x3, SubKey[p++]);
             //
             data[dataPos + 0] = (byte)(r0 >> 8);
             data[dataPos + 1] = (byte)r0;
@@ -93,13 +93,13 @@ namespace IdeaCipher
         }
 
         // Expands a 16-byte user key to the internal encryption sub-keys.
-        private static int[] expandUserKey(byte[] userKey)
+        private static int[] ExpandUserKey(byte[] userKey)
         {
             if (userKey.Length != 16)
             {
                 throw new ArgumentException("Key length must be 128 bit", "key");
             }
-            int[] key = new int[rounds * 6 + 4];
+            int[] key = new int[Rounds * 6 + 4];
             for (int i = 0; i < userKey.Length / 2; i++)
             {
                 key[i] = ((userKey[2 * i] & 0xFF) << 8) | (userKey[2 * i + 1] & 0xFF);
@@ -112,16 +112,16 @@ namespace IdeaCipher
         }
 
         // Inverts decryption/encrytion sub-keys to encrytion/decryption sub-keys.
-        private static int[] invertSubKey(int[] key)
+        private static int[] InvertSubKey(int[] key)
         {
             int[] invKey = new int[key.Length];
             int p = 0;
-            int i = rounds * 6;
+            int i = Rounds * 6;
             invKey[i + 0] = mulInv(key[p++]);
             invKey[i + 1] = addInv(key[p++]);
             invKey[i + 2] = addInv(key[p++]);
             invKey[i + 3] = mulInv(key[p++]);
-            for (int r = rounds - 1; r >= 0; r--)
+            for (int r = Rounds - 1; r >= 0; r--)
             {
                 i = r * 6;
                 int m = r > 0 ? 2 : 1;

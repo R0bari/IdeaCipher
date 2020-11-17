@@ -13,7 +13,7 @@ namespace IdeaCipher
      */
     public class IdeaCrypt
     {
-        private static int blockSize = 8;
+        private static readonly int blockSize = 8;
 
         /**
          * Encrypts or decrypts a file.
@@ -29,7 +29,7 @@ namespace IdeaCipher
          * @param mode
          *    Mode of operation.
          */
-        public static void cryptFile(String inputFileName, String outputFileName, String charKey, bool encrypt)
+        public static void СryptFile(String inputFileName, String outputFileName, String charKey, bool encrypt)
         {
             FileStream inStream = null;
             FileStream outStream = null;
@@ -60,14 +60,14 @@ namespace IdeaCipher
                     outDataLen = inDataLen;
                 }
                 outStream = new FileStream(outputFileName, FileMode.Create, FileAccess.Write);
-                processData(inStream, inDataLen, outStream, outDataLen, bsc);
+                ProcessData(inStream, inDataLen, outStream, outDataLen, bsc);
                 if (encrypt)
                 {
-                    writeDataLength(outStream, inDataLen, bsc);
+                    WriteDataLength(outStream, inDataLen, bsc);
                 }
                 else
                 {
-                    long outFileSize = readDataLength(inStream, bsc);
+                    long outFileSize = ReadDataLength(inStream, bsc);
                     if (outFileSize < 0 || outFileSize > inDataLen || outFileSize < inDataLen - blockSize + 1)
                     {
                         throw new IOException("Input file is not a valid cryptogram.");
@@ -94,31 +94,31 @@ namespace IdeaCipher
 
         private class BlockStreamCrypter
         {
-            Idea idea;
-            bool encrypt;
+            readonly Idea Idea;
+            readonly bool Encrypt;
             // data of the previous ciphertext block
             byte[] prev;
             byte[] newPrev;
             public BlockStreamCrypter(Idea idea, bool encrypt)
             {
-                this.idea = idea;
-                this.encrypt = encrypt;
+                this.Idea = idea;
+                this.Encrypt = encrypt;
                 prev = new byte[blockSize];
                 newPrev = new byte[blockSize];
             }
-            public void crypt(byte[] data, int pos)
+            public void Crypt(byte[] data, int pos)
             {
-                if (encrypt)
+                if (Encrypt)
                 {
-                    xor(data, pos, prev);
-                    idea.crypt(data, pos);
+                    Xor(data, pos, prev);
+                    Idea.Сrypt(data, pos);
                     Array.Copy(data, pos, prev, 0, blockSize);
                 }
                 else
                 {
                     Array.Copy(data, pos, newPrev, 0, blockSize);
-                    idea.crypt(data, pos);
-                    xor(data, pos, prev);
+                    Idea.Сrypt(data, pos);
+                    Xor(data, pos, prev);
                     byte[] temp = prev;
                     prev = newPrev;
                     newPrev = temp;
@@ -126,7 +126,7 @@ namespace IdeaCipher
             }
         }
 
-        private static void processData(FileStream inStream, long inDataLen, FileStream outStream, long outDataLen, BlockStreamCrypter bsc)
+        private static void ProcessData(FileStream inStream, long inDataLen, FileStream outStream, long outDataLen, BlockStreamCrypter bsc)
         {
             int bufSize = 0x200000;
             byte[] buf = new byte[bufSize];
@@ -146,7 +146,7 @@ namespace IdeaCipher
                 }
                 for (int pos = 0; pos < chunkLen; pos += blockSize)
                 {
-                    bsc.crypt(buf, pos);
+                    bsc.Crypt(buf, pos);
                 }
                 reqLen = (int)Math.Min(outDataLen - filePos, chunkLen);
 
@@ -156,7 +156,7 @@ namespace IdeaCipher
             }
         }
 
-        private static void xor(byte[] a, int pos, byte[] b)
+        private static void Xor(byte[] a, int pos, byte[] b)
         {
             for (int p = 0; p < blockSize; p++)
             {
@@ -164,7 +164,7 @@ namespace IdeaCipher
             }
         }
 
-        private static long readDataLength(FileStream stream, BlockStreamCrypter bsc)
+        private static long ReadDataLength(FileStream stream, BlockStreamCrypter bsc)
         {
             byte[] buf = new byte[blockSize];
             int trLen = stream.Read(buf, 0, blockSize);
@@ -172,21 +172,21 @@ namespace IdeaCipher
             {
                 throw new Exception("Unable to read data length suffix.");
             }
-            bsc.crypt(buf, 0);
-            return unpackDataLength(buf);
+            bsc.Crypt(buf, 0);
+            return UnpackDataLength(buf);
         }
 
-        private static void writeDataLength(FileStream stream, long dataLength, BlockStreamCrypter bsc)
+        private static void WriteDataLength(FileStream stream, long dataLength, BlockStreamCrypter bsc)
         {
-            byte[] a = packDataLength(dataLength);
-            bsc.crypt(a, 0);
+            byte[] a = PackDataLength(dataLength);
+            bsc.Crypt(a, 0);
             stream.Write(a, 0, blockSize);
         }
 
         // Packs an integer into an 8-byte block. Used to encode the file size.
         // To support larger files, we allow 13 more bits than the original IDEA V1.1 implementation.
         // But files larger than 4GB are no longer backward compatible with the old IDEA V1.1 file structure.
-        private static byte[] packDataLength(long i)
+        private static byte[] PackDataLength(long i)
         {
             if (i > 0x1FFFFFFFFFFFL) // 45 bits
             {
@@ -204,7 +204,7 @@ namespace IdeaCipher
 
         // Extracts an integer from an 8-byte block. Used to decode the file size.
         // Returns -1 if the encoded value is invalid. This means that the input file is not a valid cryptogram.
-        private static long unpackDataLength(byte[] b)
+        private static long UnpackDataLength(byte[] b)
         {
             if (b[0] != 0 || b[1] != 0 || (b[7] & 7) != 0)
             {

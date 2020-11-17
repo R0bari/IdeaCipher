@@ -105,7 +105,7 @@
             this.btnEncrypt.TabIndex = 9;
             this.btnEncrypt.Text = "Encrypt =>";
             this.btnEncrypt.UseVisualStyleBackColor = true;
-            this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
+            this.btnEncrypt.Click += new System.EventHandler(this.HandleEncryptClick);
             // 
             // btnDecrypt
             // 
@@ -115,7 +115,7 @@
             this.btnDecrypt.TabIndex = 8;
             this.btnDecrypt.Text = "<= Decrypt";
             this.btnDecrypt.UseVisualStyleBackColor = true;
-            this.btnDecrypt.Click += new System.EventHandler(this.btnDecrypt_Click);
+            this.btnDecrypt.Click += new System.EventHandler(this.HandleDecryptClick);
             // 
             // btnEncryptedSave
             // 
@@ -125,7 +125,7 @@
             this.btnEncryptedSave.TabIndex = 19;
             this.btnEncryptedSave.Text = "Save";
             this.btnEncryptedSave.UseVisualStyleBackColor = true;
-            this.btnEncryptedSave.Click += new System.EventHandler(this.btnEncryptedSave_Click);
+            this.btnEncryptedSave.Click += new System.EventHandler(this.HandleSaveEncryptedClick);
             // 
             // btnEncryptedLoad
             // 
@@ -135,7 +135,7 @@
             this.btnEncryptedLoad.TabIndex = 18;
             this.btnEncryptedLoad.Text = "Load";
             this.btnEncryptedLoad.UseVisualStyleBackColor = true;
-            this.btnEncryptedLoad.Click += new System.EventHandler(this.btnEncryptedLoad_Click);
+            this.btnEncryptedLoad.Click += new System.EventHandler(this.HandleEncryptedLoadClick);
             // 
             // btnPlainSave
             // 
@@ -145,7 +145,7 @@
             this.btnPlainSave.TabIndex = 17;
             this.btnPlainSave.Text = "Save";
             this.btnPlainSave.UseVisualStyleBackColor = true;
-            this.btnPlainSave.Click += new System.EventHandler(this.btnPlainSave_Click);
+            this.btnPlainSave.Click += new System.EventHandler(this.HandleSavePlainClick);
             // 
             // btnPlainLoad
             // 
@@ -155,7 +155,7 @@
             this.btnPlainLoad.TabIndex = 16;
             this.btnPlainLoad.Text = "Load";
             this.btnPlainLoad.UseVisualStyleBackColor = true;
-            this.btnPlainLoad.Click += new System.EventHandler(this.btnPlainLoad_Click);
+            this.btnPlainLoad.Click += new System.EventHandler(this.HandlePlainLoadClick);
             // 
             // dlgEncryptedFile
             // 

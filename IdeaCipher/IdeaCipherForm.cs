@@ -13,15 +13,15 @@ namespace IdeaCipher
 {
     public partial class cipherForm : Form
     {
-        private String inputFilename;
-        private String tempInputFilename = "tempPlainText.txt";
-        private String tempOutputFilename = "tempEncryptedData.dat";
+        private String _inputFilename;
+        private readonly String tempInputFilename = "tempPlainText.txt";
+        private readonly String tempOutputFilename = "tempEncryptedData.dat";
         public cipherForm()
         {
             InitializeComponent();
         }
 
-        private void btnEncrypt_Click(object sender, EventArgs e)
+        private void HandleEncryptClick(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(inputPlainText.Text))
             {
@@ -32,13 +32,13 @@ namespace IdeaCipher
             }
             else {
                 File.WriteAllText(tempInputFilename, inputPlainText.Text);
-                IdeaCrypt.cryptFile(tempInputFilename, tempOutputFilename, inputKey.Text, true);
+                IdeaCrypt.СryptFile(tempInputFilename, tempOutputFilename, inputKey.Text, true);
                 inputEncryptedText.Text = String.Join(" ", File.ReadAllBytes(tempOutputFilename));
             }
             
         }
 
-        private void btnDecrypt_Click(object sender, EventArgs e)
+        private void HandleDecryptClick(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(inputEncryptedText.Text))
             {
@@ -59,7 +59,7 @@ namespace IdeaCipher
                 File.WriteAllBytes(tempOutputFilename, bytes);
                 try
                 {
-                    IdeaCrypt.cryptFile(tempOutputFilename, tempInputFilename, inputKey.Text, false);
+                    IdeaCrypt.СryptFile(tempOutputFilename, tempInputFilename, inputKey.Text, false);
                 }
                 catch (Exception exception)
                 {
@@ -69,27 +69,27 @@ namespace IdeaCipher
             }
         }
 
-        private void btnPlainLoad_Click(object sender, EventArgs e)
+        private void HandlePlainLoadClick(object sender, EventArgs e)
         {
             DialogResult result = dlgPlainFile.ShowDialog();
             if (result == DialogResult.OK)
             {
-                inputFilename = dlgPlainFile.FileName;
-                inputPlainText.Text = File.ReadAllText(inputFilename);
+                _inputFilename = dlgPlainFile.FileName;
+                inputPlainText.Text = File.ReadAllText(_inputFilename);
             }
         }
 
-        private void btnEncryptedLoad_Click(object sender, EventArgs e)
+        private void HandleEncryptedLoadClick(object sender, EventArgs e)
         {
             DialogResult result = dlgEncryptedFile.ShowDialog();
             if (result == DialogResult.OK)
             {
-                inputFilename = dlgEncryptedFile.FileName;
-                inputEncryptedText.Text = String.Join(" ", File.ReadAllBytes(inputFilename));
+                _inputFilename = dlgEncryptedFile.FileName;
+                inputEncryptedText.Text = String.Join(" ", File.ReadAllBytes(_inputFilename));
             }
         }
 
-        private void btnPlainSave_Click(object sender, EventArgs e)
+        private void HandleSavePlainClick(object sender, EventArgs e)
         {
             if (dlgPlainFileSave.ShowDialog() == DialogResult.OK)
             {
@@ -97,7 +97,7 @@ namespace IdeaCipher
             }
         }
 
-        private void btnEncryptedSave_Click(object sender, EventArgs e)
+        private void HandleSaveEncryptedClick(object sender, EventArgs e)
         {
             if (dlgEncryptedFileSave.ShowDialog() == DialogResult.OK)
             {
